@@ -1,0 +1,646 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --gold: #d4af37;
+    --dark: #0a0a0a;
+    --light-dark: #151515;
+    --white: #ffffff;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+/* --- ANIMATIONS --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* NAVIGATION */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: rgba(0, 0, 0, 0.95);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo { font-size: 1.5rem; font-weight: 700; }
+.logo span { color: var(--gold); }
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { text-decoration: none; color: var(--white); font-size: 0.9rem; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(to right, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.2) 100%), 
+                url('https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+}
+
+.hero-content h1 { font-size: clamp(2rem, 8vw, 3.8rem); margin-bottom: 20px; line-height: 1.1; }
+.badge { background: var(--gold); color: #000; padding: 5px 12px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-bottom: 20px; display: inline-block; }
+
+.hero-details { display: flex; gap: 40px; margin: 30px 0; border-left: 4px solid var(--gold); padding-left: 20px; }
+.detail-item strong { display: block; font-size: 1.4rem; color: var(--gold); }
+.detail-item span { font-size: 0.85rem; color: #aaa; }
+
+.hero-btns { display: flex; gap: 20px; margin-top: 30px; }
+.btn-primary, .btn-secondary { padding: 15px 30px; text-decoration: none; font-weight: 600; border-radius: 5px; transition: 0.3s; cursor: pointer; border: none; }
+.btn-primary { background: var(--gold); color: #000; }
+.btn-secondary { border: 2px solid var(--white); color: var(--white); background: transparent; }
+
+/* SECTIONS */
+.container { width: 84%; margin: 0 auto; padding: 100px 0; }
+h2 { font-size: 2.5rem; margin-bottom: 30px; color: var(--gold); }
+
+.about-section { background-color: var(--light-dark); border-bottom: 1px solid #222; }
+.about-text p { font-size: 1.1rem; color: #ccc; max-width: 800px; line-height: 1.8; }
+
+.quick-contact { background-color: var(--dark); text-align: center; }
+.contact-form { max-width: 700px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 20px; }
+.form-group { display: flex; gap: 20px; }
+.contact-form input, .contact-form textarea { background: #1a1a1a; border: 1px solid #333; padding: 15px; color: white; border-radius: 5px; width: 100%; font-size: 1rem; }
+
+.success-msg { margin-top: 20px; padding: 20px; background: rgba(40, 167, 69, 0.2); border: 1px solid #28a745; color: #28a745; border-radius: 5px; }
+
+/* FOOTER */
+.main-footer { background: #050505; padding: 60px 8% 30px; border-top: 1px solid rgba(255,255,255,0.1); }
+.footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+.footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: #444; }
+
+@media (max-width: 768px) {
+    .form-group { flex-direction: column; }
+    .hero-content h1 { font-size: 2.5rem; }
+}
+
+/* --- STYLE CONTACT MODERNE --- */
+#contact-area {
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-card {
+    display: none; /* Caché par défaut */
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid var(--gold);
+    text-align: center;
+    animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.icon-check {
+    font-size: 50px;
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+.success-card h3 { color: var(--gold); margin-bottom: 10px; }
+.success-card p { color: #ccc; margin-bottom: 20px; }
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* On s'assure que les sections sont bien espacées */
+.about-section, .quick-contact {
+    padding: 80px 0;
+    border-top: 1px solid #222;
+}
+
+
+/* --- STYLE DU CATALOGUE --- */
+.catalogue-page {
+    padding-top: 100px; /* Espace pour la navbar fixée */
+}
+
+.page-header {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.page-header h1 span {
+    color: var(--gold);
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.car-card {
+    background: #151515;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid #222;
+}
+
+.car-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+}
+
+.car-img {
+    position: relative;
+    height: 200px;
+}
+
+.car-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.car-img .price {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--gold);
+    color: #000;
+    padding: 5px 15px;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.car-info {
+    padding: 20px;
+}
+
+.car-info h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.car-specs {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 20px;
+    border-top: 1px solid #222;
+    padding-top: 15px;
+}
+
+.btn-buy {
+    display: block;
+    text-align: center;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-buy:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+/* --- ENRICHISSEMENT CATALOGUE --- */
+.car-card .category {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--gold);
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.car-card .price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 10px 0;
+    color: #fff;
+}
+
+.car-card .status {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0,0,0,0.7);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    border: 1px solid var(--gold);
+}
+
+.car-specs .icon {
+    margin-right: 5px;
+    opacity: 0.8;
+}
+
+/* Nouveau bouton spécifique achat */
+.btn-contact-buy {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(45deg, #d4af37, #b8860b);
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.btn-contact-buy:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Responsive ajustement */
+@media (max-width: 768px) {
+    .car-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- AJUSTEMENT POUR IMAGES PERSONNELLES --- */
+.car-img img {
+    width: 100%;
+    height: 250px; /* Hauteur fixe pour que toutes les cartes soient alignées */
+    object-fit: cover; /* Recadre l'image proprement sans l'écraser */
+    display: block;
+}
+
+.car-card {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold);
+}
+
+/* --- ENRICHISSEMENT CATALOGUE FUSIONNÉ --- */
+.inventory {
+    padding: 100px 0;
+    background-color: #0d0d0d;
+    border-top: 1px solid #222;
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.car-card {
+    background: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #333;
+}
+
+.car-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--gold);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+}
+
+.car-img {
+    position: relative;
+    height: 220px;
+}
+
+.car-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.car-img .status {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0,0,0,0.8);
+    color: var(--gold);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    border: 1px solid var(--gold);
+}
+
+.car-info {
+    padding: 25px;
+}
+
+.car-info .category {
+    color: var(--gold);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.car-info h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.car-info .price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.car-specs {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.btn-contact-buy {
+    display: block;
+    text-align: center;
+    background: linear-gradient(45deg, #d4af37, #b8860b);
+    color: #000;
+    padding: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-contact-buy:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Scroll fluide */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- PAGE CONTACT MODERNE --- */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    padding: 60px 0;
+}
+
+.contact-form-section {
+    background: #111;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #222;
+}
+
+.modern-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.modern-form input, .modern-form textarea, .car-selector {
+    width: 100%;
+    padding: 15px;
+    background: #000;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.car-selector {
+    cursor: pointer;
+    border-color: var(--gold);
+}
+
+/* Sidebar info */
+.info-box {
+    background: #111;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.info-box.highlight {
+    background: var(--gold);
+    color: #000;
+}
+
+.info-box.highlight h4 { color: #000; }
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    background: var(--gold);
+    color: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 1.2rem;
+}
+
+.hours-list {
+    list-style: none;
+    padding: 0;
+}
+
+.hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+    font-size: 0.9rem;
+}
+
+.gold-text { color: var(--gold); font-weight: bold; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-wrapper { grid-template-columns: 1fr; }
+    .modern-form .form-row { grid-template-columns: 1fr; }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#successMessage {
+    animation: fadeInScale 0.5s ease-out forwards;
+}
+
+/* --- PAGE SERVICES --- */
+.services-grid-section {
+    padding: 80px 0;
+    background: #080808;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: #111;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #222;
+    transition: 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    background: #161616;
+}
+
+.service-card.highlight {
+    border: 1px solid var(--gold);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.service-card p {
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+}
+
+.service-list li {
+    color: #fff;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.service-list li i {
+    color: var(--gold);
+    margin-right: 10px;
+    font-size: 0.8rem;
+}
+
+/* Bannière CTA */
+.cta-banner {
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../images/bg-cta.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.cta-banner h2 { font-size: 2.5rem; margin-bottom: 20px; }
+
+/* --- SECTION CTA (DANS ACTIVITE.HTML) --- */
+.cta-banner {
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('../images/bg-cta.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 120px 0; /* Augmente le rembourrage vertical */
+    text-align: center;
+}
+
+.cta-banner h2 {
+    font-size: 2.8rem;
+    color: var(--gold);
+    margin-bottom: 25px; /* Espace sous le titre */
+}
+
+.cta-banner p {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 45px; /* AUGMENTÉ : Espace crucial pour que le bouton ne cache rien */
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* On s'assure que le bouton est bien un élément bloc pour respecter les marges */
+.cta-banner .btn-primary {
+    display: inline-block; 
+    padding: 15px 35px;
+}

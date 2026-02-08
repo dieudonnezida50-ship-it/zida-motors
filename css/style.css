@@ -644,3 +644,46 @@ html {
     display: inline-block; 
     padding: 15px 35px;
 }
+
+/* --- RESPONSIVE NAVIGATION --- */
+
+/* Ajustement de base pour le Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    flex-wrap: wrap; /* Permet au contenu de passer à la ligne si besoin */
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Aligne le logo et le menu l'un sous l'autre */
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 15px; /* Crée de l'espace sous le logo */
+        padding: 0;
+        gap: 15px; /* Espace régulier entre Accueil, Services et Contact */
+    }
+
+    .nav-links li a {
+        font-size: 0.9rem; /* Réduit légèrement la taille pour que tout tienne sur une ligne */
+    }
+
+    /* Ajustement du Hero (Texte principal) */
+    .hero-content h1 {
+        font-size: 2.2rem; /* Taille plus adaptée aux téléphones */
+        line-height: 1.2;
+    }
+    
+    .hero-btns {
+        display: flex;
+        flex-direction: column; /* Boutons l'un sur l'autre sur mobile */
+        gap: 10px;
+    }
+}
